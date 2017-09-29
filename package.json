@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "deploy-prod": "webpack -p --config webpack.config.prod.js"
   },
   "license": "ISC",
   "dependencies": {
