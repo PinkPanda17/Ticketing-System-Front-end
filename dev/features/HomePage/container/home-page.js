@@ -16,6 +16,12 @@ import MenuItem from 'material-ui/MenuItem';
 //Dumb
 import HomePage from '../component/home-page';
 
+//icon
+import AddIcon from 'material-ui/svg-icons/content/add-circle'
+import RemoveIcon from 'material-ui/svg-icons/content/remove-circle'
+
+
+
 const styles = {
 
     actionWrapper:{
@@ -31,21 +37,55 @@ class HomePageCtx extends Component{
         this.state={
             username:'',
             password:'',   
+            germi: '',
+            openAddTicketDialog: false,
+            openEditTicketDialog: false,
         }
     }
     componentWillMount(){
         this.props.onLoad();
     }
 
-    onDisplayAdminFunctions(){
-        return(
-            <div>
-                <MenuItem>Action 1</MenuItem>
-                <MenuItem
-                onClick={this.onLogOut.bind(this)}
-                >LOG OUT BITCHES</MenuItem>
-            </div>
-        )
+    openAddTicketDialog(){
+        this.setState({
+            openAddTicketDialog:true
+        })
+    }
+
+    onCloseAddTicketDialog(){
+        this.setState({
+            openAddTicketDialog:false,
+            openEditTicketDialog:false
+        })
+    }
+    onDisplayAdminFunctions(role){
+
+        switch(role)
+        {
+            case 'Admin':
+            return(
+                <div>
+                    <div style={{minHeight:'65px'}}/>
+                    <hr/>
+                    <MenuItem rightIcon={<AddIcon/>} onClick={this.openAddTicketDialog.bind(this)}>Add Ticket</MenuItem>
+                    
+                </div>
+            );
+            case 'Staff':
+            return(
+                <div>
+                    <MenuItem>Action 1</MenuItem>
+                </div>
+            );
+            default:
+            case 'Staff':
+            return(
+                <div>
+                    <MenuItem>Action 1</MenuItem>
+                </div>
+            );
+        }
+       
     }
 
     onLogOut(){
@@ -79,8 +119,16 @@ class HomePageCtx extends Component{
         })
     }
 
+    openEditTicketDialog(){
+        this.setState({
+            openEditTicketDialog: true,
+        })
+    }
+
+
     render(){    
         const {clearLocalStorage,onSetRole,userinfo}=this.props;
+
         const action = [
                   <FlatButton
                     label="Login"
@@ -99,6 +147,11 @@ class HomePageCtx extends Component{
         {userinfo.validated ?
             <HomePage
                 onDisplayAdminFunctions={this.onDisplayAdminFunctions.bind(this)}
+                role={userinfo.role}
+                onLogOut = {this.onLogOut.bind(this)}
+                openAddTicketDialog={this.state.openAddTicketDialog}
+                openEditTicketDialog={this.state.openEditTicketDialog}
+                onCloseDialog={this.onCloseAddTicketDialog.bind(this)}
                 /> : 
                 <Dialog
                 title="Login Form"
@@ -120,11 +173,9 @@ class HomePageCtx extends Component{
                             hintText="Password"
                             onChange={this.onChangePassword.bind(this)}
                         />
-                        
                     </div>
             </Dialog>
         }
-
         </div>
         </StyleRoot>
         )

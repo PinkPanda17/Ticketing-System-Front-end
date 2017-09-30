@@ -13,6 +13,11 @@ import MenuItem from 'material-ui/MenuItem';
 import HomePageDrawer from './home-page-drawer' ;
 import Header from './header';
 
+//SMART
+import AdminPageCtx from '../../AdminHomePage/container/admin-page';
+import StaffPageCtx from '../../StaffHomePage/container/staff-page';
+import TechnicianPageCtx from '../../technician_home_page/container/technician-page'
+
 const style = {
     buttonStyle:{margin: 12},
 
@@ -34,14 +39,27 @@ class HomePage extends Component{
     }
     
     render(){    
-        const {onDisplayAdminFunctions,role} = this.props;
+        const {onDisplayAdminFunctions,role,onLogOut,ticketData,openAddTicketDialog,onCloseDialog,openEditTicketDialog} = this.props;
         return(
         
         <div style={{width:'100%',height:'100%'}}>
                <HomePageDrawer
                onDisplayAdminFunctions={onDisplayAdminFunctions}
+               role={role}
+               onLogOut={onLogOut}
                />
-               <Header/>
+               <Header role={role}/>
+            {role == 'Admin' ?
+            <AdminPageCtx
+            ticketData={ticketData}
+            openAddTicketDialog={openAddTicketDialog}   
+            onCloseDialog={onCloseDialog}
+            openEditTicketDialog={openEditTicketDialog}
+            /> : null}
+            {role == 'Staff' ?
+            <StaffPageCtx/> : null}
+            {role == 'Technician' ?
+            <TechnicianPageCtx/> : null}
 
         </div>
 

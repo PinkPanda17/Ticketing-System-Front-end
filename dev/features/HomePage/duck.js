@@ -1,14 +1,14 @@
 import axios from 'axios';
 
-const A = 'A';
-const B ='B';
+const LOGOUT_USER = 'LOGOUT_USER';
 const IS_USER_LOGGED_IN = 'IS_USER_LOGGED_IN';
 const CHECK_USER_CREDENTIAL = 'CHECK_USER_CREDENTIAL';
 
 export const loginUser = (credential) => {
     localStorage.setItem('User',true);
-    return {type: 'CHECK_USER_CREDENTIAL',payload:true};
+    return {type: 'CHECK_USER_CREDENTIAL',payload:credential.username};
 }
+
 
 export const onLoad = () =>{
     const getUser = localStorage.getItem('User');
@@ -21,14 +21,9 @@ export const clearLocalStorage = () =>
     return{type:'B'}
 }
 
-export const onSetRole = (role) => {
-    localStorage.setItem('Role',role)
-    return{type:'B',payload: role}
-}
-
 export const logoutUser = () => {
     localStorage.removeItem('User')
-    return{type:CHECK_USER_CREDENTIAL,payload:null}
+    return{type:LOGOUT_USER,payload:null}
 }
 
 export default function(state={
@@ -39,7 +34,8 @@ export default function(state={
         case CHECK_USER_CREDENTIAL: 
             return state = {
                 ...state,
-                validated: action.payload
+                role: action.payload,
+                validated: true
             }
         ;
         case IS_USER_LOGGED_IN: 
@@ -47,6 +43,14 @@ export default function(state={
                 ...state,
                 validated: action.payload
             }
+
+        case LOGOUT_USER:
+            return state = {
+                ...state,
+                validated: false,
+                role: null,
+            }
+
     }
     return state;
 }

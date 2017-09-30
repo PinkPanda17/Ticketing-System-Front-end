@@ -10,6 +10,9 @@ import Radium, { Style,StyleRoot } from 'radium';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 
+//icon
+import LogoutIcon from 'material-ui/svg-icons/action/power-settings-new';
+
 const style = {
     buttonStyle:{margin: 12},
 
@@ -32,11 +35,15 @@ class HomePageDrawer extends Component{
     
     render(){    
         console.log('test2');
-        const {onDisplayAdminFunctions} = this.props;
+        const {onDisplayAdminFunctions,role,onLogOut} = this.props;
         return(
         <StyleRoot>
                 <Drawer open={true}>
-                     {onDisplayAdminFunctions()}
+                     {onDisplayAdminFunctions(role)}
+                <MenuItem
+                    onClick={onLogOut.bind(this)}
+                    rightIcon={<LogoutIcon/>}
+                >Log Out</MenuItem>
                 </Drawer>
         </StyleRoot>
 

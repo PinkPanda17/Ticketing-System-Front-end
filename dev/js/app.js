@@ -7,7 +7,14 @@ import Main from './main';
 import UserHeader from '../features/userHome/components/user-list-header';
 import UserList from '../features/userHome/container/user-list';
 import UserDetailHeader from '../features/userDetails/components/user-detail-header';
+
+//Main Home Page
 import MainHomePage from '../features/HomePage/container/home-page';
+//MainHomePageChildrens
+import AdminHomePageCtx from '../features/AdminHomePage/container/admin-page';
+import TechnicianHomePageCtx from '../features/technician_home_page/container/technician-page';
+import StaffHomePageCtx from '../features/StaffHomePage/container/staff-page';
+
 import store from './store';
 
 const history = syncHistoryWithStore(browserHistory, store);
@@ -16,10 +23,11 @@ export default () => {
 
 
         <Router history={history}>
-            <Route path={'/'} component={Main}>
-                <IndexRoute component={UserList}/>
+            <Route path={'/'} component={MainHomePage}>
+                <IndexRoute component={AdminHomePageCtx}/>
+                <IndexRoute component={TechnicianHomePageCtx}/>
+                <IndexRoute component={StaffHomePageCtx}/>
             </Route>
-            <Route path = {'/abc'} component = {MainHomePage} />
             {/* <Route path = {'/Admin'} component = {AdminContainer}/>
             <Route path = {'/Staff'} component = {StaffContainer}/>
             <Route path = {'/Tech'} component = {TechContainer}/> */}

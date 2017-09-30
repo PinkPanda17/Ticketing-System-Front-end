@@ -37,7 +37,7 @@ class Header extends Component{
         return(
         
         <div style={styles.headerWrapper}>
-            <h2>test</h2>
+            <h2>{role} Page</h2>
             <hr style={{width:'100%',height:'150px'}}/>
         </div>
 
