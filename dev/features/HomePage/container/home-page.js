@@ -14,7 +14,7 @@ import TextField from 'material-ui/TextField';
 import MenuItem from 'material-ui/MenuItem';
 
 //Dumb
-import HomePageDrawer from '../component/home-page-drawer';
+import HomePage from '../component/home-page';
 
 const styles = {
 
@@ -97,7 +97,7 @@ class HomePageCtx extends Component{
         <div style={{height:'100%',width:'100%'}}>
             
         {userinfo.validated ?
-            <HomePageDrawer
+            <HomePage
                 onDisplayAdminFunctions={this.onDisplayAdminFunctions.bind(this)}
                 /> : 
                 <Dialog

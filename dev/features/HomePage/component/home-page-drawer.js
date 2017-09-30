@@ -6,7 +6,7 @@ import * as duck from '../duck';
 import {Link} from 'react-router';
 import axios from 'axios';
 //Radium
-import Radium, { Style } from 'radium';
+import Radium, { Style,StyleRoot } from 'radium';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 
@@ -31,15 +31,14 @@ class HomePageDrawer extends Component{
     }
     
     render(){    
+        console.log('test2');
         const {onDisplayAdminFunctions} = this.props;
         return(
-        
-        <div>
+        <StyleRoot>
                 <Drawer open={true}>
                      {onDisplayAdminFunctions()}
                 </Drawer>
-
-        </div>
+        </StyleRoot>
 
         )
     
