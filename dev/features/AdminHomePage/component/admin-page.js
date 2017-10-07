@@ -11,8 +11,19 @@ import {
     TableRow,
     TableRowColumn,
   } from 'material-ui/Table';
+  import Toggle from 'material-ui/Toggle';
+  
 
 const styles = {
+
+    toggle:{
+        display:'flex',
+        flexDirection:'column',
+        alignItems:'center',
+        justifyContent:'center',
+        width:'40%',
+        margin:'20px 0',
+    }
   };
 class AdminDumbPage extends Component{
 
@@ -21,6 +32,7 @@ class AdminDumbPage extends Component{
         this.state={
             username:'',
             password:'',   
+            filterTickets: false,
         }
     }
 
@@ -33,36 +45,66 @@ class AdminDumbPage extends Component{
                 >
                   <TableRowColumn>{row.ticketsid}</TableRowColumn>
                   <TableRowColumn>{row.subject}</TableRowColumn>
-                  <TableRowColumn>{row.description}</TableRowColumn>
-                  <TableRowColumn>{row.category}</TableRowColumn>
                   <TableRowColumn>{row.status}</TableRowColumn>
                   <TableRowColumn>{row.StartDate? row.StartDate.toString() : "N/A"}</TableRowColumn>
-                  <TableRowColumn>{row.endDate? row.endDate.toString(): "N/A"}</TableRowColumn>
         
                 </TableRow>
                 ))
         );
     }
 
+    onDisplayUnassignedTickets(){
+        const {listOfTickets,onSelectTicket,selectedTicketIndex} = this.props;
+        const data=[];
+        listOfTickets.map((row,i)=>{
+            if(row.status=="Unassigned")
+            {
+                 data.push(<TableRow 
+                    key={i} 
+                >
+                  <TableRowColumn>{row.ticketsid}</TableRowColumn>
+                  <TableRowColumn>{row.subject}</TableRowColumn>
+                  <TableRowColumn>{row.status}</TableRowColumn>
+                  <TableRowColumn>{row.StartDate? row.StartDate.toString() : "N/A"}</TableRowColumn>
+        
+                </TableRow>)
+            }
+        })
+        console.log(data);
+        return data;
+    }
+
+    onToggleFilterTickets(e,value){
+        console.log(value)
+        const {onFilterTickets}=this.props;
+        onFilterTickets(value);
+    }
 
     render(){    
-        const {onSelectTicket} = this.props;
+        const {onSelectTicket,filterTickets} = this.props;
         return(
-        <StyleRoot>
+        <StyleRoot style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
+                <Toggle
+                    label="Filter Unassigned Tickets"
+                    defaultToggled={false}
+                    style={styles.toggle}
+                    onToggle={this.onToggleFilterTickets.bind(this)}
+                />
+
              <Table  onRowSelection={onSelectTicket.bind(this)}>
                 <TableHeader>
                     <TableRow>
                     <TableHeaderColumn>ID</TableHeaderColumn>
                     <TableHeaderColumn>Subject</TableHeaderColumn>
-                    <TableHeaderColumn>Description</TableHeaderColumn>
-                    <TableHeaderColumn>Category</TableHeaderColumn>
                     <TableHeaderColumn>Status</TableHeaderColumn>
                     <TableHeaderColumn>StartDate</TableHeaderColumn>
-                    <TableHeaderColumn>End Date</TableHeaderColumn>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {this.onDisplayTickets()}
+                    {filterTickets ?
+                        this.onDisplayUnassignedTickets():
+                        this.onDisplayTickets()
+                        }
                 </TableBody>
             </Table>
 

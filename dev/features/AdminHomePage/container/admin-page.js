@@ -37,6 +37,7 @@ class AdminPage extends Component{
             username:'',
             password:'',  
             openEditTicketDialog: false, 
+            filterTickets: false,
         }
     }
 
@@ -60,6 +61,16 @@ onCloseEditTicketDialog(){
         openEditTicketDialog: false,
     })
 }
+
+onFilterTickets(value){
+    this.setState({
+        filterTickets: value
+    })
+    const {filterTickets,ticketInfo}=this.props;
+    filterTickets(value,ticketInfo.ticketList);
+}
+
+
     render(){    
         const {ticketInfo,openAddTicketDialog,onCloseDialog,onSubmitTicket,onEditTicket}=this.props;
         return(
@@ -69,6 +80,8 @@ onCloseEditTicketDialog(){
                listOfTickets={ticketInfo.ticketList}
                onSelectTicket={this.onSelectTicket.bind(this)}
                selectedTicketIndex={this.state.selectedTicketIndex}
+               onFilterTickets={this.onFilterTickets.bind(this)}
+               filterTickets ={ this.state.filterTickets}
                />
                <AddTicketDialog 
                openAddTicketDialog={openAddTicketDialog}
@@ -82,6 +95,7 @@ onCloseEditTicketDialog(){
                onCloseDialog={this.onCloseEditTicketDialog.bind(this)}
                onEditTicket={onEditTicket}
                />
+               
             </div>
         </StyleRoot>
         )

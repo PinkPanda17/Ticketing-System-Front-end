@@ -6,6 +6,8 @@ import Radium, { Style,StyleRoot } from 'radium';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 
 const styles = {
   };
@@ -16,6 +18,7 @@ class AddTicketDialog extends Component{
         this.state={
             username:'',
             password:'',   
+            dropDownValue: null
         }
     }
     onSubmitTicket(){
@@ -32,6 +35,14 @@ class AddTicketDialog extends Component{
         }
         onSubmitTicket(ticket)
     }
+    handleChangedd(e,key,value){
+        this.setState({dropDownValue:value})
+    }
+
+    handleChangedds(e,key,value){
+        this.setState({dropDownValueStat:value}) 
+    }
+
     render(){    
         const {openAddTicketDialog,onCloseDialog}=this.props;
         const actions = [
@@ -75,17 +86,31 @@ class AddTicketDialog extends Component{
                             ref="subject"
                         />
                         <div style={{minHeight:'10px'}}/>
-                        <TextField
-                            hintText="Status"
-                            floatingLabelText="Status"
-                            ref="status"
-                        />
+                        
+                        <DropDownMenu 
+                        hintText="Status"
+                        value={this.state.dropDownValueStat} 
+                        style={{width:'70%',paddingLeft:'-10px'}}
+                        onChange={this.handleChangedds.bind(this)}                       >  
+                        <MenuItem value={1} primaryText="New" />
+                        <MenuItem value={2} primaryText="In Process" />
+                        <MenuItem value={3} primaryText="Pending for Customer" />
+                        <MenuItem value={4} primaryText="Resolved" />
+                        </DropDownMenu>
+
                         <div style={{minHeight:'10px'}}/>
-                        <TextField
-                            hintText="Category"
-                            floatingLabelText="Category"
-                            ref="category"
-                        />
+                        
+
+                        <DropDownMenu 
+                        hintText="Category"
+                        value={this.state.dropDownValue} 
+                        style={{width:'70%',paddingLeft:'-10px'}}
+                        onChange={this.handleChangedd.bind(this)}>
+                        <MenuItem value={1} primaryText="Hardware" />
+                        <MenuItem value={2} primaryText="Software" />
+                        <MenuItem value={3} primaryText="Network" />
+                        </DropDownMenu>
+
                         <div style={{minHeight:'10px'}}/>
                         <TextField
                             hintText="Description"

@@ -2,6 +2,11 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import * as duck from '../duck';
+import {
+    TableRow,
+    TableRowColumn,
+  } from 'material-ui/Table';
 //import * as duck from '../duck';
 import {Link} from 'react-router';
 import axios from 'axios';
@@ -15,6 +20,9 @@ import MenuItem from 'material-ui/MenuItem';
 
 //Dumb
 // import HomePage from '../component/home-page';
+import TechDumbPage from '../component/tech-page';
+import AddTicketDialog from '../component/add-ticket-dialog';
+import EditTicketDialog from '../component/edit-ticket-dialog';
 
 const styles = {
 

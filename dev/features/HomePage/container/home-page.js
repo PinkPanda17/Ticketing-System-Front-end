@@ -64,24 +64,53 @@ class HomePageCtx extends Component{
         {
             case 'Admin':
             return(
+                //ON CLICK - THIS WILL REDIRECT TO MY TICKETS PAGE, NOT ADD TICKETS
                 <div>
                     <div style={{minHeight:'65px'}}/>
                     <hr/>
-                    <MenuItem rightIcon={<AddIcon/>} onClick={this.openAddTicketDialog.bind(this)}>Add Ticket</MenuItem>
+                    <MenuItem onClick={this.openAddTicketDialog.bind(this)}>My Tickets</MenuItem>
+                 
+                    <MenuItem rightIcon={<AddIcon/>} onClick={this.openAddTicketDialog.bind(this)}>Create Ticket</MenuItem>
+                    <MenuItem onClick={this.openEditTicketDialog.bind(this)}>Unassigned Tickets</MenuItem>
                     
+                    <Link to={"/technician"} style={{textDecoration:'none'}}>
+                        <MenuItem>My Technician</MenuItem>
+                    </Link>
+                    <Link to={"/myreport"} style={{textDecoration:'none'}}>
+                        <MenuItem>My Reports</MenuItem>
+                    </Link>
+
+                    <hr/>
+                    <MenuItem onClick={this.openAddTicketDialog.bind(this)}>My Profile</MenuItem>
+                    <MenuItem onClick={this.openAddTicketDialog.bind(this)}>Audit Trail</MenuItem>
+                       
+                
                 </div>
             );
             case 'Staff':
             return(
                 <div>
-                    <MenuItem>Action 1</MenuItem>
+                    <div style={{minHeight:'65px'}}/>
+                    <hr/>
+                    <MenuItem onClick={this.openAddTicketDialog.bind(this)}>My Tickets</MenuItem>
+                 
+                    <MenuItem rightIcon={<AddIcon/>} onClick={this.openAddTicketDialog.bind(this)}>Create Ticket</MenuItem>
+                    <hr/>
+                    <MenuItem onClick={this.openAddTicketDialog.bind(this)}>My Profile</MenuItem>
+                    <MenuItem onClick={this.openAddTicketDialog.bind(this)}>Audit Trail</MenuItem>
+                       
                 </div>
             );
             default:
-            case 'Staff':
+            case 'Technician':
             return(
                 <div>
-                    <MenuItem>Action 1</MenuItem>
+                    <MenuItem onClick={this.openAddTicketDialog.bind(this)}>My Tickets</MenuItem>
+                 
+                    <MenuItem rightIcon={<AddIcon/>} onClick={this.openAddTicketDialog.bind(this)}>Create Ticket</MenuItem>
+                    <hr/>
+                    <MenuItem onClick={this.openAddTicketDialog.bind(this)}>My Profile</MenuItem>
+                    <MenuItem onClick={this.openAddTicketDialog.bind(this)}>Audit Trail</MenuItem>
                 </div>
             );
         }

@@ -64,5 +64,23 @@ export default function(){
             endDate: new Date(),
             category: 'Software',
         },
+        {
+            ticketsid: 8,
+            subject: 'Test Ticket 8',
+            description: 'Test Ticket Description 8',
+            status: 'Unassigned',
+            StartDate: new Date(),
+            endDate: new Date(),
+            category: 'Software',
+        },
+        {
+            ticketsid: 9,
+            subject: 'Test Ticket 9',
+            description: 'Test Ticket Description 9',
+            status: 'Unassigned',
+            StartDate: new Date(),
+            endDate: new Date(),
+            category: 'Software',
+        },
     ]
 }

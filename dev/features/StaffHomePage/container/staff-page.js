@@ -5,6 +5,11 @@ import {connect} from 'react-redux';
 import * as duck from '../duck';
 import {Link} from 'react-router';
 import axios from 'axios';
+import {
+    TableRow,
+    TableRowColumn,
+  } from 'material-ui/Table';
+
 //Radium
 import Radium, { Style,StyleRoot } from 'radium';
 
@@ -15,6 +20,9 @@ import MenuItem from 'material-ui/MenuItem';
 
 //Dumb
 // import HomePage from '../component/home-page';
+import StaffDumbPage from '../component/staff-page';
+import AddTicketDialog from '../component/add-ticket-dialog';
+import EditTicketDialog from '../component/edit-ticket-dialog';
 
 const styles = {
 

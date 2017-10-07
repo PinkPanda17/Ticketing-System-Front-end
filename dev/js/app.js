@@ -14,6 +14,9 @@ import MainHomePage from '../features/HomePage/container/home-page';
 import AdminHomePageCtx from '../features/AdminHomePage/container/admin-page';
 import TechnicianHomePageCtx from '../features/technician_home_page/container/technician-page';
 import StaffHomePageCtx from '../features/StaffHomePage/container/staff-page';
+import TechPageCtx from '../features/AdminHomePage/container/mytech-page';
+import MyReportPageCtx from '../features/AdminHomePage/container/myreport-page';
+
 
 import store from './store';
 
@@ -28,6 +31,10 @@ export default () => {
                 <IndexRoute component={TechnicianHomePageCtx}/>
                 <IndexRoute component={StaffHomePageCtx}/>
             </Route>
+            <Route path={'/technician'} component={TechPageCtx}/>
+            <Route path={'/myreport'} component={MyReportPageCtx}/>
+            
+
             {/* <Route path = {'/Admin'} component = {AdminContainer}/>
             <Route path = {'/Staff'} component = {StaffContainer}/>
             <Route path = {'/Tech'} component = {TechContainer}/> */}

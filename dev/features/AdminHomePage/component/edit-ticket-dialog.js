@@ -71,6 +71,7 @@ class EditTicketDialog extends Component{
                             floatingLabelText = "Assigned To"
                             ref="assignedto"
                             defaultValue={ticketInfo?ticketInfo.assignedto:''}
+
                         />
                         <div style={{minHeight:'10px'}}/>
                         <TextField
